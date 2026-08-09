@@ -1,0 +1,137 @@
+{
+  "area": "MG Road",
+  "total_responses": 10,
+  "responses": [
+    {
+      "id": 1,
+      "interests": [
+        "Cafe",
+        "Bakery"
+      ],
+      "freq": {
+        "Cafe": "Weekly",
+        "Bakery": "Weekly"
+      },
+      "budget": {
+        "Cafe": 200,
+        "Bakery": 150
+      }
+    },
+    {
+      "id": 2,
+      "interests": [
+        "Grocery"
+      ],
+      "freq": {
+        "Grocery": "Monthly"
+      },
+      "budget": {
+        "Grocery": 1000
+      }
+    },
+    {
+      "id": 3,
+      "interests": [
+        "Bakery",
+        "Restaurant"
+      ],
+      "freq": {
+        "Bakery": "Weekly",
+        "Restaurant": "Monthly"
+      },
+      "budget": {
+        "Bakery": 120
+      }
+    },
+    {
+      "id": 4,
+      "interests": [
+        "Pharmacy"
+      ],
+      "freq": {
+        "Pharmacy": "AsNeeded"
+      },
+      "budget": {
+        "Pharmacy": 500
+      }
+    },
+    {
+      "id": 5,
+      "interests": [
+        "Cafe",
+        "Grocery"
+      ],
+      "freq": {
+        "Cafe": "Weekly",
+        "Grocery": "Monthly"
+      },
+      "budget": {
+        "Cafe": 150,
+        "Grocery": 800
+      }
+    },
+    {
+      "id": 6,
+      "interests": [
+        "Cafe"
+      ],
+      "freq": {
+        "Cafe": "Daily"
+      },
+      "budget": {
+        "Cafe": 80
+      }
+    },
+    {
+      "id": 7,
+      "interests": [
+        "Bakery"
+      ],
+      "freq": {
+        "Bakery": "Weekly"
+      },
+      "budget": {
+        "Bakery": 100
+      }
+    },
+    {
+      "id": 8,
+      "interests": [
+        "Grocery"
+      ],
+      "freq": {
+        "Grocery": "Weekly"
+      },
+      "budget": {
+        "Grocery": 600
+      }
+    },
+    {
+      "id": 9,
+      "interests": [
+        "Restaurant",
+        "Cafe"
+      ],
+      "freq": {
+        "Restaurant": "Monthly",
+        "Cafe": "Weekly"
+      },
+      "budget": {
+        "Restaurant": 400,
+        "Cafe": 180
+      }
+    },
+    {
+      "id": 10,
+      "interests": [
+        "Cafe"
+      ],
+      "freq": {
+        "Cafe": "Weekly"
+      },
+      "budget": {
+        "Cafe": 120
+      }
+    }
+  ]
+}

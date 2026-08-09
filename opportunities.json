@@ -1,0 +1,57 @@
+[
+  {
+    "category": "Cafe",
+    "score": 0.608,
+    "components": {
+      "demand": 0.5,
+      "competition_ratio": 0.16666666666666666,
+      "accessibility": 0.7,
+      "affordability": 0.6,
+      "growth": 0.3
+    }
+  },
+  {
+    "category": "Bakery",
+    "score": 0.538,
+    "components": {
+      "demand": 0.3,
+      "competition_ratio": 0.16666666666666666,
+      "accessibility": 0.7,
+      "affordability": 0.6,
+      "growth": 0.3
+    }
+  },
+  {
+    "category": "Restaurant",
+    "score": 0.503,
+    "components": {
+      "demand": 0.2,
+      "competition_ratio": 0.16666666666666666,
+      "accessibility": 0.7,
+      "affordability": 0.6,
+      "growth": 0.3
+    }
+  },
+  {
+    "category": "Grocery",
+    "score": 0.497,
+    "components": {
+      "demand": 0.3,
+      "competition_ratio": 0.3333333333333333,
+      "accessibility": 0.7,
+      "affordability": 0.6,
+      "growth": 0.3
+    }
+  },
+  {
+    "category": "Pharmacy",
+    "score": 0.468,
+    "components": {
+      "demand": 0.1,
+      "competition_ratio": 0.16666666666666666,
+      "accessibility": 0.7,
+      "affordability": 0.6,
+      "growth": 0.3
+    }
+  }
+]

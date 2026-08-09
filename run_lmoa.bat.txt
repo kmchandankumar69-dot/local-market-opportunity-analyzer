@@ -1,0 +1,4 @@
+@echo off
+start cmd /k "cd C:\Projects\lmoa_mvp\backend\express && npm start"
+timeout /t 3
+start cmd /k "cd C:\Projects\lmoa_mvp\frontend\react && npx parcel public/index.html --open"
