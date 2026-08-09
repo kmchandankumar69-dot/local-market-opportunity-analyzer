@@ -1,245 +1,105 @@
-# Local Market Opportunity Analyzer
+# 🗺️ Local Market Opportunity Analyzer (LMOA)
 
-A web-based MVP that helps identify potential business opportunities in different locations across Bangalore.
+> A full-stack GIS-based MVP designed to identify, evaluate, and visualize high-potential commercial and retail business opportunities across Bangalore.
 
-The application displays opportunity locations on an interactive map and provides information such as:
-
-- Business category
-- Opportunity location
-- Suitability score
-- Estimated local rent/site price
-- Local-area information
-- Category-specific opportunity markers
-- Different colors for different business categories
+![Status](https://img.shields.io/badge/status-active-success.svg)
+![MVP](https://img.shields.io/badge/version-MVP-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ---
 
-## Requirements
+## ✨ Overview
 
-Install these before running the project:
+The **Local Market Opportunity Analyzer** helps entrepreneurs and analysts explore optimal business locations using an interactive map interface. It processes spatial datasets to evaluate regional viability, matching candidate locations with custom demographic and commercial metrics.
 
-- Node.js
-- npm
-- Python 3 (only required for the optional scoring script)
-
-You do NOT need PostgreSQL to run the current web application.
+### Key Capabilities
+* **Interactive Mapping:** Visualizes opportunity locations across Bangalore using Leaflet and React-Leaflet.
+* **Category Filtering:** Color-coded, category-specific map markers to easily distinguish between different business types.
+* **Comprehensive Insights:** Instantly view suitability scores, estimated local rent/site prices, and localized area data per pin.
+* **Dual Execution Mode:** Run the full web application via local servers or execute computations independently via an optional Python script.
 
 ---
 
-# How to Run the Project
+## 🛠️ Technology Stack
 
-## Step 1 — Open the Project
+### Frontend
+* **Core:** React.js, React DOM
+* **Mapping & GIS:** Leaflet, React-Leaflet
+* **Bundler:** Parcel
 
-Open Command Prompt and go to the project folder.
+### Backend & Data Processing
+* **API Server:** Node.js, Express.js
+* **Middleware:** CORS, Multer, CSV Parse
+* **Standalone Script:** Python 3 (for offline scoring pipelines)
+* **Database Schema:** PostgreSQL (`schema.sql` included for relational scaling, though **not required** for the MVP runtime)
 
-Example:
+---
 
-```bat
-cd /d "C:\Projects\lmoa_mvp"
+## 📂 Project Structure
 
-
-Step 2 — Start the Backend
-
-Open Command Prompt and run:
-
-cd /d "C:\Projects\lmoa_mvp\backend\express"
-npm install
-npm start
-
-You should see:
-
-LMOA Express backend running at http://localhost:4000
-POST /api/opportunities/compute to compute scores
-
-Keep this Command Prompt window open.
-
-The backend runs at:
-
-http://localhost:4000
-Step 3 — Start the Frontend
-
-Open a SECOND Command Prompt window.
-
-Run:
-
-cd /d "C:\Projects\lmoa_mvp\frontend\react"
-npm install
-npm start
-
-The project uses Parcel, so Parcel will start the React application and normally open the browser automatically.
-
-If the browser does not open automatically, use the localhost address shown in the terminal.
-
-Step 4 — Use the Application
-
-Once the backend and frontend are running, open the Local Market Opportunity Analyzer in your browser.
-
-The application allows you to:
-
-View the Bangalore map
-View available opportunity locations
-Filter opportunities by business category
-View different category-specific markers
-Click opportunity locations
-View suitability scores
-View estimated rent/site prices
-View additional local-area information
-
-Keep both Command Prompt windows open while using the application.
-
-Quick Start Summary
-
-You need TWO Command Prompt windows.
-
-Terminal 1 — Backend
-cd /d "C:\Projects\lmoa_mvp\backend\express"
-npm install
-npm start
-Terminal 2 — Frontend
-cd /d "C:\Projects\lmoa_mvp\frontend\react"
-npm install
-npm start
-
-Then use the application in your browser.
-
-Optional: Run the Standalone Scoring Script
-
-The project also includes a standalone Python scoring script.
-
-From the project root:
-
-cd /d "C:\Projects\lmoa_mvp"
-python scripts\score.py data\sample_businesses.csv data\sample_survey.json
-
-This runs the scoring process without starting the web application.
-
-This step is optional and is not required for running the main web application.
-
-Project Structure
-Local Market Opportunity Analyzer
+```text
+Local-Market-Opportunity-Analyzer/
 │
 ├── backend/
-│   └── express/
+│   └── express/              # Node.js & Express REST API
 │       ├── index.js
-│       ├── package.json
-│       └── ...
+│       └── package.json
 │
 ├── frontend/
-│   └── react/
+│   └── react/                # React SPA bundled with Parcel
 │       ├── public/
 │       │   └── index.html
 │       ├── src/
-│       │   └── ...
 │       └── package.json
 │
 ├── data/
-│   ├── sample_businesses.csv
-│   └── sample_survey.json
+│   ├── sample_businesses.csv # Candidate business location records
+│   └── sample_survey.json    # Market research survey inputs
 │
 ├── scripts/
-│   └── score.py
+│   └── score.py              # Standalone Python scoring utility
 │
 ├── opportunities.json
-├── schema.sql
+├── schema.sql                # Optional PostgreSQL schema
 └── README.md
-Technologies Used
-Frontend
-React
-React DOM
-React-Leaflet
-Leaflet
-Parcel
-Backend
-Node.js
-Express.js
-CORS
-Multer
-CSV Parse
-Data / Scoring
-CSV
-JSON
-Python
-Backend API
 
-The backend provides the opportunity computation endpoint:
+🚀 Getting Started
+Prerequisites
+Ensure you have the following installed on your local machine:
 
-POST /api/opportunities/compute
+Node.js & npm
 
-Backend address:
+Python 3 (Optional — only required if running the standalone scoring script)
 
-http://localhost:4000
+Step 1 — Start the Backend Server
+Open your first Command Prompt window and launch the Express API:
 
-The frontend communicates with the backend to compute and display opportunity results.
-
-Database
-
-The repository contains:
-
-schema.sql
-
-which contains a PostgreSQL database schema for the project.
-
-The current MVP does NOT require PostgreSQL to run the web application.
-
-The current backend works with the project's included data files.
-
-Troubleshooting
-npm is not recognized
-
-Install Node.js and npm, then close and reopen Command Prompt.
-
-Backend does not start
-
-Make sure you are inside:
-
-backend\express
-
-Then run:
-
+DOS
+cd /d "C:\Projects\lmoa_mvp\backend\express"
 npm install
 npm start
+The backend will boot up at http://localhost:4000. Keep this window open.
 
-The backend should show:
+Step 2 — Start the Frontend Client
+Open a second Command Prompt window and launch the React application:
 
-LMOA Express backend running at http://localhost:4000
-Frontend does not start
-
-Make sure you are inside:
-
-frontend\react
-
-Then run:
-
+DOS
+cd /d "C:\Projects\lmoa_mvp\frontend\react"
 npm install
 npm start
-The browser does not open
+Parcel will compile the React app and typically open your browser automatically. If it doesn't, navigate to the localhost URL displayed in the terminal. Keep this window open as well.
 
-Check the Parcel output in the frontend terminal.
+📊 Optional: Run the Standalone Python Scoring Script
+If you want to execute the core data analysis logic directly through Python without firing up the web application:
 
-Open the localhost address shown by Parcel manually.
-
-The map or opportunities do not load
-
-Make sure the backend is running first.
-
-The backend must be available at:
-
-http://localhost:4000
-
-Then restart the frontend.
-
-Important
-
-The project should be run with BOTH:
-
-Backend
-+
-Frontend
-
-The backend Command Prompt and frontend Command Prompt should remain open while using the application.
-
-Author
-
-KM Chandan Kumar
-
-
+DOS
+cd /d "C:\Projects\lmoa_mvp"
+python scripts\score.py data\sample_businesses.csv data\sample_survey.json
+🔧 Troubleshooting
+Issue	Solution
+npm is not recognized	Ensure Node.js is installed correctly, then close and reopen your Command Prompt.
+Backend fails to start	Verify you are inside the backend\express directory before running npm install and npm start.
+Frontend/Map fails to load	Ensure the backend is running actively at http://localhost:4000 before starting the frontend.
+Browser doesn't open	Check the Parcel terminal output for the active http://localhost: address and open it manually.
+🛡️ License
+Developed by KM Chandan Kumar. This project is available under the MIT License.
