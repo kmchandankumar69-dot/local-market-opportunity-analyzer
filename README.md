@@ -1,108 +1,293 @@
-# LMOA 2.1 — Local Market Opportunity Analyzer
+# Local Market Opportunity Analyzer (LMOA)
 
-A full-stack portfolio project for exploring illustrative local-business opportunities. LMOA combines a React dashboard, Express API, Leaflet map, explainable weighted scoring, competitor explorer, multi-location comparison, financial feasibility scenarios and printable market reports.
+**Discover local business opportunities through data-driven market analysis.**
 
-> **Data integrity warning:** The bundled businesses and area indicators are synthetic illustrative demo data. They are not verified listings, measured demand, actual rents or commercial advice. Scores are deterministic heuristics, not machine-learning predictions. Replace the dataset with properly licensed, verified data before making real-world decisions.
+Local Market Opportunity Analyzer (LMOA) is a web-based application designed to help users explore local business opportunities using structured business data, market indicators, and an opportunity-scoring system. It provides an interactive interface for analyzing potential markets and reviewing generated opportunity reports.
 
-## What's new in 2.1
-- Explicit source/provenance metadata and `illustrative_demo` data status in API responses.
-- Location comparison view for up to three neighborhoods, reusing the existing score calculations.
-- Conservative, expected and optimistic financial scenarios (customer volume ±20%, gross margin ±5 percentage points).
-- Stronger validation for financial input values and consistent 400 errors for invalid scenarios.
-- Expanded tests for score ordering, data provenance, weight normalization and financial sensitivity.
-- GitHub Actions workflow runs tests and the production build.
+The project combines a React-based frontend, a Node.js backend, and structured JSON data to demonstrate how local market information can be organized into actionable insights.
 
-## Stack
-- React 18 + Vite
-- Express REST API
-- Leaflet / React-Leaflet with OpenStreetMap tiles
-- Recharts for analytics
-- Node.js built-in test runner
+## Overview
 
-## Requirements
-- Node.js 20 LTS recommended (18.18+ should work)
-- npm
-- Internet connection to install dependencies and load map tiles
+Starting a business requires more than an idea. Entrepreneurs need to understand their target market, identify potential demand, assess competition, and compare possible locations or business categories.
 
-## Run on Windows (Command Prompt)
-Extract the ZIP, open **Command Prompt**, and run:
+LMOA aims to simplify this process by bringing market exploration and opportunity analysis into a single application. Users can explore available business data, evaluate opportunity scores, and review reports that summarize the factors influencing each result.
 
-```bat
-cd /d "%USERPROFILE%\Downloads\lmoa-2.1"
+## Key Features
+
+- **Market Opportunity Analysis:** Evaluate business opportunities using the application's scoring framework.
+- **Business Data Exploration:** Work with structured local business information stored in JSON format.
+- **Opportunity Scoring:** Review opportunity scores and their contributing factors.
+- **Market Reports:** Present analysis results in a report-oriented interface.
+- **Interactive Dashboard:** Explore information through a React-based user interface.
+- **REST API Backend:** Process application requests through a Node.js and Express backend.
+- **Automated Tests:** Run backend tests to verify important application behavior.
+- **Production Build:** Generate an optimized frontend build using Vite.
+- **Environment Configuration:** Use environment-variable templates for configuration without committing private settings.
+- **Continuous Integration:** Includes a GitHub Actions workflow for automated project checks.
+
+## Technology Stack
+
+| Component | Technologies |
+|---|---|
+| Frontend | React, JavaScript, Vite |
+| UI and visualization | CSS, Recharts, Lucide React |
+| Maps | Leaflet, React Leaflet dependencies |
+| Backend | Node.js, Express |
+| Data storage | JSON-based business dataset |
+| Testing | Node.js test runner |
+| Build tooling | Vite |
+| Version control | Git and GitHub |
+| CI | GitHub Actions |
+
+## Project Architecture
+
+The application is organized into separate frontend, backend, data, and documentation components.
+
+```text
+local-market-opportunity-analyzer/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── backend/
+│   ├── index.js
+│   ├── index.test.js
+│   └── package.json
+│
+├── data/
+│   └── businesses.json
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   └── FEATURES.md
+│
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── .env.example
+│   └── src/
+│       ├── main.jsx
+│       └── styles.css
+│
+├── .env.example
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## How It Works
+
+### 1. Business Data
+
+The application uses structured business information maintained in `data/businesses.json`. This dataset provides the input for the application's market exploration and analysis features.
+
+### 2. Backend Processing
+
+The Node.js and Express backend handles application requests and implements the server-side logic required by the frontend. Its implementation is maintained in `backend/index.js`.
+
+### 3. Opportunity Scoring
+
+The application applies its opportunity-scoring framework to evaluate available market information. Scores and their contributing factors help users compare opportunities and understand the basis of a result.
+
+An opportunity score should be treated as an analytical indicator rather than a guarantee of commercial success.
+
+### 4. Interactive Frontend
+
+The React frontend presents the application's analysis through an interactive web interface. Vite provides the development server and production build process.
+
+### 5. Reports and Insights
+
+Users can review the resulting market analysis through the reporting interface, helping organize findings for further investigation and decision-making.
+
+## Getting Started
+
+### Prerequisites
+
+Install the following software before running the project:
+
+- Node.js and npm
+- Git
+- A modern web browser
+
+Check your installations:
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/kmchandankumar69-dot/local-market-opportunity-analyzer.git
+cd local-market-opportunity-analyzer
+```
+
+### 2. Install Root Dependencies
+
+```bash
 npm install
+```
+
+### 3. Install Frontend Dependencies
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+### 4. Install Backend Dependencies
+
+```bash
+cd backend
+npm install
+cd ..
+```
+
+### 5. Configure Environment Variables
+
+Review the example configuration files:
+
+- `.env.example`
+- `frontend/.env.example`
+
+Create local environment files only if required by the configuration. Replace placeholder values with appropriate settings for your environment.
+
+**Security:** Never commit real API keys, passwords, tokens, or other secrets to GitHub.
+
+### 6. Start the Application
+
+Start the backend using the script defined in `backend/package.json`:
+
+```bash
+cd backend
+npm start
+```
+
+Open a second terminal at the project root and start the frontend:
+
+```bash
+cd frontend
 npm run dev
 ```
 
-Open the frontend URL shown in the terminal (normally `http://localhost:5173`). The API runs at `http://localhost:4000`.
+Open the local URL printed by Vite in your terminal.
 
-If the extracted folder name differs, use that folder name in the `cd` command. To run separately, open two CMD windows:
+If the backend uses a different startup script or requires additional environment variables, follow the configuration defined in its package file and environment template.
 
-```bat
-npm run dev:api
-```
+## Build for Production
 
-```bat
-npm run dev:web
-```
+To generate the production frontend build:
 
-## Verify before publishing
-
-```bat
-npm test
+```bash
+cd frontend
 npm run build
 ```
 
-Health check: `http://localhost:4000/api/health`
-
-## API
-- `GET /api/health` — health and version
-- `GET /api/businesses` — illustrative business records and provenance labels
-- `GET /api/areas` — illustrative area indicators
-- `GET /api/analysis?category=Cafe` — ranked areas for a category
-- `POST /api/analysis` — recalculate with category and custom weights
-- `POST /api/feasibility` — financial estimate and three sensitivity scenarios
-
-### Example scoring request
-
-```json
-{
-  "category": "Cafe",
-  "weights": {
-    "demand": 0.35,
-    "competition": 0.25,
-    "affordability": 0.20,
-    "accessibility": 0.12,
-    "growth": 0.08
-  }
-}
-```
-
-Weights are normalized by the API; relative proportions are used. All-zero weights fall back to a neutral denominator, so use at least one positive weight for meaningful output.
-
-### Financial scenario assumptions
-The expected case uses the supplied customer count and gross margin. The conservative case reduces customers/day by 20% and margin by 5 percentage points; the optimistic case increases them by 20% and 5 percentage points. These are simple sensitivity examples, not statistically derived forecasts.
-
-## Scoring methodology
-The score is a weighted sum of five 0–100 indicators: demand, competition gap, affordability, accessibility and growth. Competition gap is estimated from the number of same-category demo records within 1.25 km. All bundled indicator values are synthetic. The UI's confidence percentage is a heuristic display signal, not a statistical confidence interval.
-
-## Project structure
+The generated files are placed in:
 
 ```text
-lmoa-2.1/
-├── .github/workflows/ci.yml
-├── backend/index.js
-├── backend/index.test.js
-├── data/businesses.json
-├── docs/FEATURES.md
-├── frontend/src/main.jsx
-├── frontend/src/styles.css
-├── frontend/index.html
-├── frontend/package.json
-└── package.json
+frontend/dist/
 ```
 
-## Next steps for a real deployment
-1. Replace synthetic records with appropriately licensed real datasets and preserve source, license, retrieval time and geographic coverage.
-2. Add a persistent database only when saved analyses and data volume require it.
-3. Add authentication, authorization, rate limiting, deployment secrets and backups before public use. Configure `CORS_ORIGIN` in the backend deployment environment to the deployed frontend origin(s); defaults are for local development. For a deployed frontend, create `frontend/.env.local` with `VITE_API_URL=https://your-api-host/api` before building (do not commit deployment secrets).
-4. Evaluate score behavior against representative data and known outcomes before describing it as predictive.
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+Run the preview command from the `frontend` directory.
+
+## Running Tests
+
+Run the backend test suite from the project root:
+
+```bash
+npm --prefix backend test
+```
+
+The backend tests are maintained in:
+
+```text
+backend/index.test.js
+```
+
+These tests help validate application behavior and reduce the risk of regressions during development.
+
+## API and Configuration
+
+The backend implementation is located in `backend/index.js`. Review that file to identify the available API routes, request formats, response structures, and configuration requirements.
+
+The frontend communicates with the backend according to the application's configured API settings. Configure any required backend URL or environment variables using the supplied example configuration.
+
+Refer to the following documentation for additional technical details:
+
+- `docs/ARCHITECTURE.md` — application architecture.
+- `docs/FEATURES.md` — feature descriptions.
+
+## Data and Accuracy Considerations
+
+LMOA's output depends on the quality, completeness, and freshness of the business data provided to it.
+
+- Structured sample data is not necessarily representative of an entire real-world market.
+- Scores depend on the assumptions and factors implemented in the application's scoring logic.
+- Sample or synthetic data should not be interpreted as verified live market intelligence.
+- Before making business or financial decisions, validate findings against reliable local sources, field research, competitor analysis, and current market conditions.
+
+LMOA is intended to support market exploration and preliminary analysis. It does not guarantee business profitability or success.
+
+## Continuous Integration
+
+The repository includes a GitHub Actions workflow at:
+
+```text
+.github/workflows/ci.yml
+```
+
+This workflow provides a place for automated checks to run when configured repository events occur. Review the workflow file to see exactly which jobs, commands, and triggers are enabled.
+
+## Future Enhancements
+
+Potential areas for future development include:
+
+- Integration with verified, up-to-date local business datasets.
+- Geographic filtering and richer map-based market exploration.
+- More detailed competitor and market-density analysis.
+- Improved explanations of individual opportunity scores.
+- Exportable market reports.
+- Enhanced dashboard visualizations.
+- Additional automated tests and continuous integration checks.
+- Improved frontend performance through code splitting and lazy loading.
+
+These are potential enhancements, not claims that all such features are currently implemented.
+
+## Contributing
+
+Contributions and suggestions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Implement and test your changes.
+4. Commit your changes with a descriptive message.
+5. Open a pull request explaining the changes.
+
+Please avoid committing generated build output, dependency folders, environment files containing secrets, or unrelated changes.
+
+## Disclaimer
+
+LMOA is a software project for market exploration and analytical decision support. Its results depend on the data and scoring methodology available in the application. Users should independently verify market conditions before making business, investment, or financial decisions.
+
+## Author
+
+**Chandan Kumar**
+
+GitHub: [@kmchandankumar69-dot](https://github.com/kmchandankumar69-dot)
+
+## License
+
+A license has not been specified in this README. Check the repository for an existing `LICENSE` file before selecting or declaring a license for the project.
