@@ -1,105 +1,108 @@
-# 🗺️ Local Market Opportunity Analyzer (LMOA)
+# LMOA 2.1 — Local Market Opportunity Analyzer
 
-> A full-stack GIS-based MVP designed to identify, evaluate, and visualize high-potential commercial and retail business opportunities across Bangalore.
+A full-stack portfolio project for exploring illustrative local-business opportunities. LMOA combines a React dashboard, Express API, Leaflet map, explainable weighted scoring, competitor explorer, multi-location comparison, financial feasibility scenarios and printable market reports.
 
-![Status](https://img.shields.io/badge/status-active-success.svg)
-![MVP](https://img.shields.io/badge/version-MVP-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+> **Data integrity warning:** The bundled businesses and area indicators are synthetic illustrative demo data. They are not verified listings, measured demand, actual rents or commercial advice. Scores are deterministic heuristics, not machine-learning predictions. Replace the dataset with properly licensed, verified data before making real-world decisions.
 
----
+## What's new in 2.1
+- Explicit source/provenance metadata and `illustrative_demo` data status in API responses.
+- Location comparison view for up to three neighborhoods, reusing the existing score calculations.
+- Conservative, expected and optimistic financial scenarios (customer volume ±20%, gross margin ±5 percentage points).
+- Stronger validation for financial input values and consistent 400 errors for invalid scenarios.
+- Expanded tests for score ordering, data provenance, weight normalization and financial sensitivity.
+- GitHub Actions workflow runs tests and the production build.
 
-## ✨ Overview
+## Stack
+- React 18 + Vite
+- Express REST API
+- Leaflet / React-Leaflet with OpenStreetMap tiles
+- Recharts for analytics
+- Node.js built-in test runner
 
-The **Local Market Opportunity Analyzer** helps entrepreneurs and analysts explore optimal business locations using an interactive map interface. It processes spatial datasets to evaluate regional viability, matching candidate locations with custom demographic and commercial metrics.
+## Requirements
+- Node.js 20 LTS recommended (18.18+ should work)
+- npm
+- Internet connection to install dependencies and load map tiles
 
-### Key Capabilities
-* **Interactive Mapping:** Visualizes opportunity locations across Bangalore using Leaflet and React-Leaflet.
-* **Category Filtering:** Color-coded, category-specific map markers to easily distinguish between different business types.
-* **Comprehensive Insights:** Instantly view suitability scores, estimated local rent/site prices, and localized area data per pin.
-* **Dual Execution Mode:** Run the full web application via local servers or execute computations independently via an optional Python script.
+## Run on Windows (Command Prompt)
+Extract the ZIP, open **Command Prompt**, and run:
 
----
+```bat
+cd /d "%USERPROFILE%\Downloads\lmoa-2.1"
+npm install
+npm run dev
+```
 
-## 🛠️ Technology Stack
+Open the frontend URL shown in the terminal (normally `http://localhost:5173`). The API runs at `http://localhost:4000`.
 
-### Frontend
-* **Core:** React.js, React DOM
-* **Mapping & GIS:** Leaflet, React-Leaflet
-* **Bundler:** Parcel
+If the extracted folder name differs, use that folder name in the `cd` command. To run separately, open two CMD windows:
 
-### Backend & Data Processing
-* **API Server:** Node.js, Express.js
-* **Middleware:** CORS, Multer, CSV Parse
-* **Standalone Script:** Python 3 (for offline scoring pipelines)
-* **Database Schema:** PostgreSQL (`schema.sql` included for relational scaling, though **not required** for the MVP runtime)
+```bat
+npm run dev:api
+```
 
----
+```bat
+npm run dev:web
+```
 
-## 📂 Project Structure
+## Verify before publishing
+
+```bat
+npm test
+npm run build
+```
+
+Health check: `http://localhost:4000/api/health`
+
+## API
+- `GET /api/health` — health and version
+- `GET /api/businesses` — illustrative business records and provenance labels
+- `GET /api/areas` — illustrative area indicators
+- `GET /api/analysis?category=Cafe` — ranked areas for a category
+- `POST /api/analysis` — recalculate with category and custom weights
+- `POST /api/feasibility` — financial estimate and three sensitivity scenarios
+
+### Example scoring request
+
+```json
+{
+  "category": "Cafe",
+  "weights": {
+    "demand": 0.35,
+    "competition": 0.25,
+    "affordability": 0.20,
+    "accessibility": 0.12,
+    "growth": 0.08
+  }
+}
+```
+
+Weights are normalized by the API; relative proportions are used. All-zero weights fall back to a neutral denominator, so use at least one positive weight for meaningful output.
+
+### Financial scenario assumptions
+The expected case uses the supplied customer count and gross margin. The conservative case reduces customers/day by 20% and margin by 5 percentage points; the optimistic case increases them by 20% and 5 percentage points. These are simple sensitivity examples, not statistically derived forecasts.
+
+## Scoring methodology
+The score is a weighted sum of five 0–100 indicators: demand, competition gap, affordability, accessibility and growth. Competition gap is estimated from the number of same-category demo records within 1.25 km. All bundled indicator values are synthetic. The UI's confidence percentage is a heuristic display signal, not a statistical confidence interval.
+
+## Project structure
 
 ```text
-Local-Market-Opportunity-Analyzer/
-│
-├── backend/
-│   └── express/              # Node.js & Express REST API
-│       ├── index.js
-│       └── package.json
-│
-├── frontend/
-│   └── react/                # React SPA bundled with Parcel
-│       ├── public/
-│       │   └── index.html
-│       ├── src/
-│       └── package.json
-│
-├── data/
-│   ├── sample_businesses.csv # Candidate business location records
-│   └── sample_survey.json    # Market research survey inputs
-│
-├── scripts/
-│   └── score.py              # Standalone Python scoring utility
-│
-├── opportunities.json
-├── schema.sql                # Optional PostgreSQL schema
-└── README.md
+lmoa-2.1/
+├── .github/workflows/ci.yml
+├── backend/index.js
+├── backend/index.test.js
+├── data/businesses.json
+├── docs/FEATURES.md
+├── frontend/src/main.jsx
+├── frontend/src/styles.css
+├── frontend/index.html
+├── frontend/package.json
+└── package.json
+```
 
-🚀 Getting Started
-Prerequisites
-Ensure you have the following installed on your local machine:
-
-Node.js & npm
-
-Python 3 (Optional — only required if running the standalone scoring script)
-
-Step 1 — Start the Backend Server
-Open your first Command Prompt window and launch the Express API:
-
-DOS
-cd /d "C:\Projects\lmoa_mvp\backend\express"
-npm install
-npm start
-The backend will boot up at http://localhost:4000. Keep this window open.
-
-Step 2 — Start the Frontend Client
-Open a second Command Prompt window and launch the React application:
-
-DOS
-cd /d "C:\Projects\lmoa_mvp\frontend\react"
-npm install
-npm start
-Parcel will compile the React app and typically open your browser automatically. If it doesn't, navigate to the localhost URL displayed in the terminal. Keep this window open as well.
-
-📊 Optional: Run the Standalone Python Scoring Script
-If you want to execute the core data analysis logic directly through Python without firing up the web application:
-
-DOS
-cd /d "C:\Projects\lmoa_mvp"
-python scripts\score.py data\sample_businesses.csv data\sample_survey.json
-🔧 Troubleshooting
-Issue	Solution
-npm is not recognized	Ensure Node.js is installed correctly, then close and reopen your Command Prompt.
-Backend fails to start	Verify you are inside the backend\express directory before running npm install and npm start.
-Frontend/Map fails to load	Ensure the backend is running actively at http://localhost:4000 before starting the frontend.
-Browser doesn't open	Check the Parcel terminal output for the active http://localhost: address and open it manually.
-🛡️ License
-Developed by KM Chandan Kumar. This project is available under the MIT License.
+## Next steps for a real deployment
+1. Replace synthetic records with appropriately licensed real datasets and preserve source, license, retrieval time and geographic coverage.
+2. Add a persistent database only when saved analyses and data volume require it.
+3. Add authentication, authorization, rate limiting, deployment secrets and backups before public use. Configure `CORS_ORIGIN` in the backend deployment environment to the deployed frontend origin(s); defaults are for local development. For a deployed frontend, create `frontend/.env.local` with `VITE_API_URL=https://your-api-host/api` before building (do not commit deployment secrets).
+4. Evaluate score behavior against representative data and known outcomes before describing it as predictive.

@@ -1,0 +1,21 @@
+{
+  "name": "lmoa-2-1",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Local Market Opportunity Analyzer \u2014 market intelligence and business feasibility platform",
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "start": "npm --prefix backend start",
+    "build": "npm --prefix frontend run build",
+    "test": "npm --prefix backend test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
