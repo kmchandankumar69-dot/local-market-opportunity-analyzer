@@ -266,17 +266,7 @@ Potential areas for future development include:
 
 These are potential enhancements, not claims that all such features are currently implemented.
 
-## Contributing
 
-Contributions and suggestions are welcome.
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Implement and test your changes.
-4. Commit your changes with a descriptive message.
-5. Open a pull request explaining the changes.
-
-Please avoid committing generated build output, dependency folders, environment files containing secrets, or unrelated changes.
 
 ## Disclaimer
 
